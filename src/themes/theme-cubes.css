@@ -1,0 +1,75 @@
+/* ===========================================
+   Cubes Theme — Cubase Inspired
+   Steinberg purple/blue accents, medium-dark surfaces
+   Clean European design aesthetic
+   =========================================== */
+
+[data-theme="cubes"] {
+  /* Surface tokens */
+  --color-bg: #1c1c24;
+  --color-surface: #26262f;
+  --color-surface-elevated: #31313c;
+  --color-surface-sunken: #15151b;
+
+  /* Border tokens */
+  --color-border: #3b3b4a;
+  --color-border-subtle: #2e2e3b;
+  --color-border-strong: #50506a;
+
+  /* Text tokens */
+  --color-text-primary: #e2e0ea;
+  --color-text-secondary: #9e9bb0;
+  --color-text-muted: #63607a;
+  --color-text-inverse: #1c1c24;
+
+  /* Brand tokens — Steinberg purple */
+  --color-primary: #7b68ee;
+  --color-primary-hover: #9585f5;
+  --color-primary-active: #6550d8;
+  --color-secondary: #5e7ce0;
+  --color-accent: #c084fc;
+
+  /* Status tokens */
+  --color-success: #4ade80;
+  --color-warning: #f0b040;
+  --color-error: #f06060;
+  --color-info: #5e7ce0;
+
+  /* Interactive tokens */
+  --color-button-bg: var(--color-primary);
+  --color-button-text: #ffffff;
+  --color-button-hover: var(--color-primary-hover);
+  --color-input-bg: #222230;
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-primary);
+  --color-input-text: var(--color-text-primary);
+  --color-input-placeholder: var(--color-text-muted);
+  --color-toggle-thumb: #f0f0f0;
+
+  /* Kanban stage tokens */
+  --color-stage-spark: #f59e0b;
+  --color-stage-expand: #f97316;
+  --color-stage-arrange: #ef4444;
+  --color-stage-elevate: #ec4899;
+  --color-stage-finalize: #8b5cf6;
+  --color-stage-mixing: #6366f1;
+  --color-stage-mastering: #3b82f6;
+  --color-stage-complete: #22c55e;
+
+  /* Sidebar */
+  --color-sidebar-bg: #222230;
+  --color-sidebar-text: var(--color-text-secondary);
+  --color-sidebar-text-active: var(--color-text-primary);
+  --color-sidebar-hover: #31313c;
+  --color-sidebar-active: var(--color-primary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.55);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}

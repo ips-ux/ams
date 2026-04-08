@@ -1,0 +1,74 @@
+/* ===========================================
+   Loops Theme — FL Studio Inspired
+   Cool steel-blue grays, teal/blue accents, darker feel
+   =========================================== */
+
+[data-theme="loops"] {
+  /* Surface tokens */
+  --color-bg: #1a1d21;
+  --color-surface: #22272d;
+  --color-surface-elevated: #2c3239;
+  --color-surface-sunken: #131619;
+
+  /* Border tokens */
+  --color-border: #343b44;
+  --color-border-subtle: #282f37;
+  --color-border-strong: #475261;
+
+  /* Text tokens */
+  --color-text-primary: #dce2ea;
+  --color-text-secondary: #8d99a8;
+  --color-text-muted: #586475;
+  --color-text-inverse: #1a1d21;
+
+  /* Brand tokens — FL Studio steel blue */
+  --color-primary: #4a9ec5;
+  --color-primary-hover: #65b3d6;
+  --color-primary-active: #3a87ab;
+  --color-secondary: #5b8a9a;
+  --color-accent: #4adec2;
+
+  /* Status tokens */
+  --color-success: #4ade80;
+  --color-warning: #f0b040;
+  --color-error: #f06050;
+  --color-info: #4a9ec5;
+
+  /* Interactive tokens */
+  --color-button-bg: var(--color-primary);
+  --color-button-text: #ffffff;
+  --color-button-hover: var(--color-primary-hover);
+  --color-input-bg: #1e2228;
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-primary);
+  --color-input-text: var(--color-text-primary);
+  --color-input-placeholder: var(--color-text-muted);
+  --color-toggle-thumb: #f0f0f0;
+
+  /* Kanban stage tokens */
+  --color-stage-spark: #f59e0b;
+  --color-stage-expand: #f97316;
+  --color-stage-arrange: #ef4444;
+  --color-stage-elevate: #ec4899;
+  --color-stage-finalize: #8b5cf6;
+  --color-stage-mixing: #6366f1;
+  --color-stage-mastering: #3b82f6;
+  --color-stage-complete: #22c55e;
+
+  /* Sidebar */
+  --color-sidebar-bg: #1e2228;
+  --color-sidebar-text: var(--color-text-secondary);
+  --color-sidebar-text-active: var(--color-text-primary);
+  --color-sidebar-hover: #2c3239;
+  --color-sidebar-active: var(--color-primary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.55);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}

@@ -1,0 +1,75 @@
+/* ===========================================
+   Logical Theme — Logic Pro Inspired
+   Sleek dark gray, silver/white text, subtle blue accents
+   Apple-clean professional aesthetic
+   =========================================== */
+
+[data-theme="logical"] {
+  /* Surface tokens */
+  --color-bg: #232323;
+  --color-surface: #2d2d2d;
+  --color-surface-elevated: #373737;
+  --color-surface-sunken: #1b1b1b;
+
+  /* Border tokens */
+  --color-border: #424242;
+  --color-border-subtle: #363636;
+  --color-border-strong: #555555;
+
+  /* Text tokens */
+  --color-text-primary: #e8e8e8;
+  --color-text-secondary: #aaaaaa;
+  --color-text-muted: #6e6e6e;
+  --color-text-inverse: #232323;
+
+  /* Brand tokens — Logic Pro blue */
+  --color-primary: #4a90d9;
+  --color-primary-hover: #6aa6e8;
+  --color-primary-active: #3678c2;
+  --color-secondary: #a1a1a6;
+  --color-accent: #5ac8fa;
+
+  /* Status tokens */
+  --color-success: #34c759;
+  --color-warning: #ff9f0a;
+  --color-error: #ff453a;
+  --color-info: #5ac8fa;
+
+  /* Interactive tokens */
+  --color-button-bg: var(--color-primary);
+  --color-button-text: #ffffff;
+  --color-button-hover: var(--color-primary-hover);
+  --color-input-bg: #262626;
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-primary);
+  --color-input-text: var(--color-text-primary);
+  --color-input-placeholder: var(--color-text-muted);
+  --color-toggle-thumb: #ffffff;
+
+  /* Kanban stage tokens */
+  --color-stage-spark: #f59e0b;
+  --color-stage-expand: #f97316;
+  --color-stage-arrange: #ef4444;
+  --color-stage-elevate: #ec4899;
+  --color-stage-finalize: #8b5cf6;
+  --color-stage-mixing: #6366f1;
+  --color-stage-mastering: #3b82f6;
+  --color-stage-complete: #22c55e;
+
+  /* Sidebar */
+  --color-sidebar-bg: #282828;
+  --color-sidebar-text: var(--color-text-secondary);
+  --color-sidebar-text-active: var(--color-text-primary);
+  --color-sidebar-hover: #333333;
+  --color-sidebar-active: var(--color-primary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.45);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}

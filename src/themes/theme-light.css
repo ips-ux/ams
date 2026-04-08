@@ -1,0 +1,77 @@
+/* ===========================================
+   Light Theme — Clean light mode
+   Full contrast inversion with adjusted brand colors
+   =========================================== */
+
+[data-theme="light"] {
+  /* Surface tokens */
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-surface-sunken: #e8e8e8;
+
+  /* Border tokens */
+  --color-border: #d4d4d4;
+  --color-border-subtle: #e5e5e5;
+  --color-border-strong: #a3a3a3;
+
+  /* Text tokens */
+  --color-text-primary: #171717;
+  --color-text-secondary: #525252;
+  --color-text-muted: #a3a3a3;
+  --color-text-inverse: #f5f5f5;
+
+  /* Brand tokens */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-active: #3730a3;
+  --color-secondary: #7c3aed;
+  --color-accent: #d97706;
+
+  /* Status tokens */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+  --color-info: #2563eb;
+
+  /* Interactive tokens */
+  --color-button-bg: var(--color-primary);
+  --color-button-text: #ffffff;
+  --color-button-hover: var(--color-primary-hover);
+  --color-input-bg: #ffffff;
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-primary);
+  --color-input-text: var(--color-text-primary);
+  --color-input-placeholder: var(--color-text-muted);
+  --color-toggle-thumb: #ffffff;
+
+  /* Kanban stage tokens */
+  --color-stage-spark: #d97706;
+  --color-stage-expand: #ea580c;
+  --color-stage-arrange: #dc2626;
+  --color-stage-elevate: #db2777;
+  --color-stage-finalize: #7c3aed;
+  --color-stage-mixing: #4f46e5;
+  --color-stage-mastering: #2563eb;
+  --color-stage-complete: #16a34a;
+
+  /* Sidebar */
+  --color-sidebar-bg: #ffffff;
+  --color-sidebar-text: var(--color-text-secondary);
+  --color-sidebar-text-active: var(--color-text-primary);
+  --color-sidebar-hover: #f0f0f0;
+  --color-sidebar-active: var(--color-primary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Shadows */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: 0 0 0 1px var(--color-border);
+  --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+  /* Bauhaus overrides */
+  --card-bg-complete: color-mix(in srgb, var(--color-stage-complete) 12%, var(--color-surface));
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}

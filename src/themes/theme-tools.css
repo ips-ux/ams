@@ -1,0 +1,75 @@
+/* ===========================================
+   Tools Theme — Pro Tools Inspired
+   Industrial blue-gray interface, slate accents
+   Darker, utilitarian broadcast/studio feel
+   =========================================== */
+
+[data-theme="tools"] {
+  /* Surface tokens */
+  --color-bg: #282e36;
+  --color-surface: #323a44;
+  --color-surface-elevated: #3d4754;
+  --color-surface-sunken: #1f252c;
+
+  /* Border tokens */
+  --color-border: #475566;
+  --color-border-subtle: #3a4452;
+  --color-border-strong: #5a6a7e;
+
+  /* Text tokens */
+  --color-text-primary: #d8dde4;
+  --color-text-secondary: #97a3b2;
+  --color-text-muted: #627185;
+  --color-text-inverse: #282e36;
+
+  /* Brand tokens — Pro Tools slate blue */
+  --color-primary: #6494c4;
+  --color-primary-hover: #7daad5;
+  --color-primary-active: #4e7dac;
+  --color-secondary: #708ea8;
+  --color-accent: #8ab4d6;
+
+  /* Status tokens */
+  --color-success: #5cb870;
+  --color-warning: #d9a84e;
+  --color-error: #d45d5d;
+  --color-info: #6494c4;
+
+  /* Interactive tokens */
+  --color-button-bg: var(--color-primary);
+  --color-button-text: #ffffff;
+  --color-button-hover: var(--color-primary-hover);
+  --color-input-bg: #2b323b;
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-primary);
+  --color-input-text: var(--color-text-primary);
+  --color-input-placeholder: var(--color-text-muted);
+  --color-toggle-thumb: #e8e8e8;
+
+  /* Kanban stage tokens */
+  --color-stage-spark: #f59e0b;
+  --color-stage-expand: #f97316;
+  --color-stage-arrange: #ef4444;
+  --color-stage-elevate: #ec4899;
+  --color-stage-finalize: #8b5cf6;
+  --color-stage-mixing: #6366f1;
+  --color-stage-mastering: #3b82f6;
+  --color-stage-complete: #22c55e;
+
+  /* Sidebar */
+  --color-sidebar-bg: #2b323b;
+  --color-sidebar-text: var(--color-text-secondary);
+  --color-sidebar-text-active: var(--color-text-primary);
+  --color-sidebar-hover: #3d4754;
+  --color-sidebar-active: var(--color-primary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.45);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}
