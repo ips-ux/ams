@@ -24,6 +24,10 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Use Node.js 24 runtime for all action scripts (replaces deprecated Node 20)
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   deploy:
     name: Deploy to GitHub Pages
