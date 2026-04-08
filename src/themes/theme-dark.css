@@ -1,0 +1,75 @@
+/* ===========================================
+   Dark Theme — Default
+   Tokens already defined in tokens.css :root
+   This file exists for selector parity
+   =========================================== */
+
+[data-theme="dark"] {
+  /* Surface tokens */
+  --color-bg: #0f0f0f;
+  --color-surface: #1a1a1a;
+  --color-surface-elevated: #242424;
+  --color-surface-sunken: #0a0a0a;
+
+  /* Border tokens */
+  --color-border: #2e2e2e;
+  --color-border-subtle: #1f1f1f;
+  --color-border-strong: #404040;
+
+  /* Text tokens */
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #666666;
+  --color-text-inverse: #0f0f0f;
+
+  /* Brand tokens */
+  --color-primary: #6366f1;
+  --color-primary-hover: #818cf8;
+  --color-primary-active: #4f46e5;
+  --color-secondary: #8b5cf6;
+  --color-accent: #f59e0b;
+
+  /* Status tokens */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Interactive tokens */
+  --color-button-bg: var(--color-primary);
+  --color-button-text: #ffffff;
+  --color-button-hover: var(--color-primary-hover);
+  --color-input-bg: var(--color-surface);
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-primary);
+  --color-input-text: var(--color-text-primary);
+  --color-input-placeholder: var(--color-text-muted);
+  --color-toggle-thumb: #ffffff;
+
+  /* Kanban stage tokens */
+  --color-stage-spark: #f59e0b;
+  --color-stage-expand: #f97316;
+  --color-stage-arrange: #ef4444;
+  --color-stage-elevate: #ec4899;
+  --color-stage-finalize: #8b5cf6;
+  --color-stage-mixing: #6366f1;
+  --color-stage-mastering: #3b82f6;
+  --color-stage-complete: #22c55e;
+
+  /* Sidebar */
+  --color-sidebar-bg: var(--color-surface);
+  --color-sidebar-text: var(--color-text-secondary);
+  --color-sidebar-text-active: var(--color-text-primary);
+  --color-sidebar-hover: var(--color-surface-elevated);
+  --color-sidebar-active: var(--color-primary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}

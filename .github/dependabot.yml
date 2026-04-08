@@ -1,0 +1,47 @@
+# Dependabot — Automated Dependency Updates
+#
+# Creates weekly PRs to bump outdated npm dependencies.
+# Each PR goes through the normal CI gate before it can be merged.
+# Groups related packages together to reduce PR noise.
+
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/Denver
+    open-pull-requests-limit: 5
+    # Group minor + patch bumps together, leave majors separate
+    groups:
+      react:
+        patterns: ["react", "react-dom", "@types/react*"]
+      vite-tooling:
+        patterns: ["vite", "@vitejs/*", "@tailwindcss/*"]
+      firebase:
+        patterns: ["firebase", "@firebase/*"]
+      tanstack:
+        patterns: ["@tanstack/*"]
+      dnd-kit:
+        patterns: ["@dnd-kit/*"]
+      fontawesome:
+        patterns: ["@fortawesome/*"]
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/Denver
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "chore(actions)"

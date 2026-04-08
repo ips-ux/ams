@@ -1,0 +1,74 @@
+/* ===========================================
+   Live Theme — Ableton Live Inspired
+   Warm grays, signature orange accent, muted palette
+   =========================================== */
+
+[data-theme="live"] {
+  /* Surface tokens */
+  --color-bg: #1e1e1e;
+  --color-surface: #2d2d2d;
+  --color-surface-elevated: #383838;
+  --color-surface-sunken: #161616;
+
+  /* Border tokens */
+  --color-border: #3d3d3d;
+  --color-border-subtle: #333333;
+  --color-border-strong: #505050;
+
+  /* Text tokens */
+  --color-text-primary: #e6e1db;
+  --color-text-secondary: #a69f96;
+  --color-text-muted: #6b6560;
+  --color-text-inverse: #1e1e1e;
+
+  /* Brand tokens — Ableton orange */
+  --color-primary: #ff764d;
+  --color-primary-hover: #ff9470;
+  --color-primary-active: #e5613a;
+  --color-secondary: #d4a655;
+  --color-accent: #ff764d;
+
+  /* Status tokens */
+  --color-success: #87c157;
+  --color-warning: #d4a655;
+  --color-error: #e05a4f;
+  --color-info: #6bb5c9;
+
+  /* Interactive tokens */
+  --color-button-bg: var(--color-primary);
+  --color-button-text: #1e1e1e;
+  --color-button-hover: var(--color-primary-hover);
+  --color-input-bg: #252525;
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-primary);
+  --color-input-text: var(--color-text-primary);
+  --color-input-placeholder: var(--color-text-muted);
+  --color-toggle-thumb: #f5f5f5;
+
+  /* Kanban stage tokens */
+  --color-stage-spark: #f59e0b;
+  --color-stage-expand: #f97316;
+  --color-stage-arrange: #ef4444;
+  --color-stage-elevate: #ec4899;
+  --color-stage-finalize: #8b5cf6;
+  --color-stage-mixing: #6366f1;
+  --color-stage-mastering: #3b82f6;
+  --color-stage-complete: #22c55e;
+
+  /* Sidebar */
+  --color-sidebar-bg: #252525;
+  --color-sidebar-text: var(--color-text-secondary);
+  --color-sidebar-text-active: var(--color-text-primary);
+  --color-sidebar-hover: #333333;
+  --color-sidebar-active: var(--color-primary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.45);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}

@@ -1,0 +1,1 @@
+export { DiscographyPage } from './DiscographyPage'
