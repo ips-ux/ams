@@ -2,27 +2,19 @@
 // Aspire AMS — LibraryPage
 // Grid browser for all Aspire Academy methodology documents.
 // Read-only — no CRUD operations.
+// Content loaded from Firestore manifest via useLibraryDocs.
 // =============================================================================
 
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { LIBRARY_DOCS } from './libraryDocs'
-import type { LibraryDoc } from './libraryDocs'
+import { useLibraryDocs } from '@/hooks/useLibraryDocs'
+import type { ManifestEntry } from '@/types/models'
 
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 
 type CategoryFilter = 'all' | 'production' | 'business' | 'workflow'
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-function getPreview(raw: string): string {
-  const lines = raw.split('\n').filter((l) => l.trim() && !l.startsWith('#'))
-  return lines.join(' ').slice(0, 120) + '...'
-}
 
 // ---------------------------------------------------------------------------
 // FilterTab
@@ -65,7 +57,7 @@ function FilterTab({
 // CategoryChip
 // ---------------------------------------------------------------------------
 
-function CategoryChip({ category }: { category: LibraryDoc['category'] }) {
+function CategoryChip({ category }: { category: ManifestEntry['category'] }) {
   return (
     <span
       style={{
@@ -89,7 +81,7 @@ function CategoryChip({ category }: { category: LibraryDoc['category'] }) {
 // DocCard
 // ---------------------------------------------------------------------------
 
-function DocCard({ doc }: { doc: LibraryDoc }) {
+function DocCard({ doc }: { doc: ManifestEntry }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -146,7 +138,7 @@ function DocCard({ doc }: { doc: LibraryDoc }) {
             lineHeight: 1.5,
           }}
         >
-          {getPreview(doc.raw)}
+          {doc.preview}
         </div>
 
         {/* CTA */}
@@ -166,16 +158,42 @@ function DocCard({ doc }: { doc: LibraryDoc }) {
 }
 
 // ---------------------------------------------------------------------------
+// SkeletonCard — shown while manifest loads
+// ---------------------------------------------------------------------------
+
+function SkeletonCard() {
+  return (
+    <div
+      style={{
+        border: '1px solid var(--color-border)',
+        background: 'var(--color-surface)',
+        borderRadius: 'var(--radius-sm)',
+        padding: 20,
+      }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
+        <div style={{ width: 32, height: 32, background: 'var(--color-border)', borderRadius: 4 }} />
+        <div style={{ width: 64, height: 18, background: 'var(--color-border)', borderRadius: 4 }} />
+      </div>
+      <div style={{ marginTop: 10, height: 18, width: '75%', background: 'var(--color-border)', borderRadius: 4 }} />
+      <div style={{ marginTop: 8, height: 14, background: 'var(--color-border)', borderRadius: 4 }} />
+      <div style={{ marginTop: 4, height: 14, width: '85%', background: 'var(--color-border)', borderRadius: 4 }} />
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
 // LibraryPage
 // ---------------------------------------------------------------------------
 
 export function LibraryPage() {
   const [category, setCategory] = useState<CategoryFilter>('all')
+  const { docs, loading, error } = useLibraryDocs()
 
   const filtered =
     category === 'all'
-      ? LIBRARY_DOCS
-      : LIBRARY_DOCS.filter((d) => d.category === category)
+      ? docs
+      : docs.filter((d) => d.category === category)
 
   return (
     <div style={{ padding: '24px 20px', maxWidth: 1200 }}>
@@ -228,6 +246,13 @@ export function LibraryPage() {
         </div>
       </div>
 
+      {/* Error state */}
+      {error && (
+        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', marginBottom: 16 }}>
+          {error}
+        </p>
+      )}
+
       {/* Card grid */}
       <div
         style={{
@@ -236,9 +261,10 @@ export function LibraryPage() {
           gap: 16,
         }}
       >
-        {filtered.map((doc) => (
-          <DocCard key={doc.slug} doc={doc} />
-        ))}
+        {loading
+          ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
+          : filtered.map((doc) => <DocCard key={doc.slug} doc={doc} />)
+        }
       </div>
     </div>
   )

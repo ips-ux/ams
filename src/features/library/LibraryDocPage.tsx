@@ -2,12 +2,14 @@
 // Aspire AMS — LibraryDocPage
 // Full-page reader for a single methodology document.
 // Two-column layout: sticky sidebar nav + scrollable prose content.
+// Content fetched from Firestore via useLibraryDoc (version-cached).
 // =============================================================================
 
 import { useParams, Link } from 'react-router-dom'
 import { useMemo } from 'react'
 import { marked } from 'marked'
-import { getDocBySlug, LIBRARY_DOCS } from './libraryDocs'
+import { LIBRARY_DOCS } from './libraryDocs'
+import { useLibraryDoc } from '@/hooks/useLibraryDoc'
 
 // ---------------------------------------------------------------------------
 // LibraryDocPage
@@ -15,21 +17,38 @@ import { getDocBySlug, LIBRARY_DOCS } from './libraryDocs'
 
 export function LibraryDocPage() {
   const { slug } = useParams<{ slug: string }>()
-  const doc = slug ? getDocBySlug(slug) : undefined
+  const { doc, loading, error } = useLibraryDoc(slug)
 
   const html = useMemo(() => {
-    if (!doc) return ''
-    const result = marked.parse(doc.raw)
-    // marked.parse returns string | Promise<string> — use sync form
+    if (!doc?.content) return ''
+    const result = marked.parse(doc.content)
     return typeof result === 'string' ? result : ''
   }, [doc])
 
-  // 404 state
-  if (!doc) {
+  // Loading state
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 64,
+          color: 'var(--color-text-secondary)',
+          fontSize: 14,
+        }}
+      >
+        Loading guide…
+      </div>
+    )
+  }
+
+  // Error / not found state
+  if (error || !doc) {
     return (
       <div style={{ padding: 32 }}>
         <p style={{ color: 'var(--color-text-primary)', marginBottom: 16 }}>
-          Guide not found.
+          {error ?? 'Guide not found.'}
         </p>
         <Link
           to="/library"
@@ -69,7 +88,7 @@ export function LibraryDocPage() {
         .ams-prose hr { border: none; border-top: 1px solid var(--color-border); margin: 1.5em 0; }
       `}</style>
 
-      {/* Left nav sidebar */}
+      {/* Left nav sidebar — static skeleton for instant render */}
       <nav
         style={{
           width: 220,

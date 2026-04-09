@@ -129,6 +129,40 @@ export interface MethodologySection {
   contentPreview: string
 }
 
+/**
+ * A single entry in the library manifest — lightweight metadata and guidance
+ * content served without fetching the full document.
+ */
+export interface ManifestEntry {
+  slug: string
+  title: string
+  category: MethodologyCategory
+  icon: string
+  order: number
+  /** Primary app feature this doc supports, or null for app-wide docs. */
+  featureKey: string | null
+  /** ~120 chars of non-heading content, shown in the library grid card. */
+  preview: string
+  /** 2–3 sentence description for feature guidance callouts. */
+  summary: string
+  /** 3–5 bullet points: what students learn from this doc. */
+  keyTopics: string[]
+  /** 2–3 actionable tips specific to this doc's workflow stage. */
+  stageTips: string[]
+}
+
+/**
+ * The manifest document stored at /aspireMethods/--manifest.
+ * Fetched once per session; drives tiers 1 and 2 without additional reads.
+ */
+export interface LibraryManifest {
+  /** slug → version number. Used to invalidate full-doc cache entries. */
+  versions: Record<string, number>
+  /** 12–15 tip strings for dashboard ProtocolCallout rotation. */
+  globalTips: string[]
+  docs: ManifestEntry[]
+}
+
 // =============================================================================
 // Document models
 // =============================================================================
@@ -357,9 +391,15 @@ export interface MethodologyDoc extends BaseDocument {
   title: string
   slug: string
   category: MethodologyCategory
+  icon: string
   order: number
+  /** Primary app feature this doc supports, or null for app-wide docs. */
+  featureKey: string | null
+  /** Full markdown content — fetched on demand via useLibraryDoc. */
   content: string
   sections: MethodologySection[]
+  /** Incremented in Firebase Console to invalidate the localStorage cache. */
+  version: number
 }
 
 // -- Challenge ----------------------------------------------------------------

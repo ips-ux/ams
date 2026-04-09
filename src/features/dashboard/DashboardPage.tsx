@@ -1,16 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useProjects } from '@/hooks/useProjects'
+import { useLibraryDocs } from '@/hooks/useLibraryDocs'
 import { PROJECT_STAGES } from '@/types/enums'
 import type { ProjectStage } from '@/types/enums'
 import { ProtocolCallout } from '@/components/ui/ProtocolCallout'
-
-const TIPS = [
-  { label: 'PRODUCTION', text: 'Focus on the arrangement — most mix problems are arrangement problems.' },
-  { label: 'BRANDING', text: 'Your sound IS your brand. Consistency builds recognition faster than promotion.' },
-  { label: 'WORKFLOW', text: 'Finish tracks, even imperfect ones. A completed song teaches more than 10 unfinished ones.' },
-  { label: 'PROMOTION', text: 'Release consistently. The algorithm rewards artists who show up regularly.' },
-  { label: 'MINDSET', text: 'Compare your work to your past self, not other artists. Progress is personal.' },
-]
 
 const cardStyle: React.CSSProperties = {
   border: '1px solid var(--color-border)',
@@ -52,6 +45,7 @@ function stageDotStyle(stage: ProjectStage): React.CSSProperties {
 
 export function DashboardPage() {
   const { projects } = useProjects()
+  const { globalTips } = useLibraryDocs()
 
   const stageCounts = PROJECT_STAGES.map((stage) => ({
     stage,
@@ -76,7 +70,9 @@ export function DashboardPage() {
   const svgCircumference = 2 * Math.PI * svgR
   const svgDash = (completionPct / 100) * svgCircumference
 
-  const tip = TIPS[new Date().getDate() % 5]
+  const tip = globalTips.length > 0
+    ? globalTips[new Date().getDate() % globalTips.length]
+    : null
 
   return (
     <div
@@ -357,11 +353,13 @@ export function DashboardPage() {
       </div>
 
       {/* Card 6 — Aspire Tip (12 cols) */}
-      <div style={{ gridColumn: 'span 12' }}>
-        <ProtocolCallout title={tip.label} variant="info">
-          {tip.text}
-        </ProtocolCallout>
-      </div>
+      {tip && (
+        <div style={{ gridColumn: 'span 12' }}>
+          <ProtocolCallout title="PROTOCOL" variant="info">
+            {tip}
+          </ProtocolCallout>
+        </div>
+      )}
     </div>
   )
 }
