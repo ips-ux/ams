@@ -268,67 +268,83 @@ export function Sidebar() {
     })
   }
 
-  // Community bottom bar — 4 icon-only buttons spanning full width
-  const renderCommunityBar = () => (
-    <div
-      style={{
-        borderTop: '1px solid var(--color-sidebar-border)',
-        padding: '6px 4px',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        flexShrink: 0,
-        gap: '2px',
-      }}
-    >
-      {COMMUNITY_ITEMS.map((item) => (
-        <NavLink
-          key={item.path}
-          to={item.path}
-          end={item.path === '/community'}
-          title={item.label}
-          style={({ isActive }) => ({
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flex: 1,
-            padding: '8px 4px',
-            borderRadius: 'var(--radius-md)',
-            textDecoration: 'none',
-            color: isActive ? 'var(--color-primary)' : 'var(--color-sidebar-text)',
-            background: isActive
-              ? 'color-mix(in srgb, var(--color-primary) 12%, transparent)'
-              : 'transparent',
-            transition: 'background var(--transition-fast), color var(--transition-fast)',
-            position: 'relative',
-          })}
-          className="sidebar-navlink"
-        >
-          {({ isActive }) => (
-            <>
-              {isActive && (
-                <span
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: '20%',
-                    right: '20%',
-                    height: '2px',
-                    background: 'var(--color-primary)',
-                    borderRadius: '0 0 2px 2px',
-                  }}
+  // Community bottom bar — horizontal when expanded, vertical stack when collapsed
+  const renderCommunityBar = (forceExpanded = false) => {
+    const expanded = forceExpanded || !isCollapsed
+    return (
+      <div
+        style={{
+          borderTop: '1px solid var(--color-sidebar-border)',
+          padding: expanded ? '6px 4px' : '6px 8px',
+          display: 'flex',
+          flexDirection: expanded ? 'row' : 'column',
+          justifyContent: expanded ? 'space-around' : 'flex-start',
+          flexShrink: 0,
+          gap: '2px',
+        }}
+      >
+        {COMMUNITY_ITEMS.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            end={item.path === '/community'}
+            title={item.label}
+            style={({ isActive }) => ({
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: expanded ? 'center' : 'center',
+              flex: expanded ? 1 : undefined,
+              padding: expanded ? '8px 4px' : '8px',
+              borderRadius: 'var(--radius-md)',
+              textDecoration: 'none',
+              color: isActive ? 'var(--color-primary)' : 'var(--color-sidebar-text)',
+              background: isActive
+                ? 'color-mix(in srgb, var(--color-primary) 12%, transparent)'
+                : 'transparent',
+              transition: 'background var(--transition-fast), color var(--transition-fast)',
+              position: 'relative',
+            })}
+            className="sidebar-navlink"
+          >
+            {({ isActive }) => (
+              <>
+                {isActive && expanded && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: '20%',
+                      right: '20%',
+                      height: '2px',
+                      background: 'var(--color-primary)',
+                      borderRadius: '0 0 2px 2px',
+                    }}
+                  />
+                )}
+                {isActive && !expanded && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: '2px',
+                      background: 'var(--color-primary)',
+                      borderRadius: '0 2px 2px 0',
+                    }}
+                  />
+                )}
+                <FontAwesomeIcon
+                  icon={item.icon}
+                  style={{ width: '16px', height: '16px' }}
                 />
-              )}
-              <FontAwesomeIcon
-                icon={item.icon}
-                style={{ width: '16px', height: '16px' }}
-              />
-            </>
-          )}
-        </NavLink>
-      ))}
-    </div>
-  )
+              </>
+            )}
+          </NavLink>
+        ))}
+      </div>
+    )
+  }
 
   const sidebarContent = (forceExpanded = false) => (
     <>
@@ -376,6 +392,7 @@ export function Sidebar() {
       <div
         style={{
           flex: 1,
+          minHeight: 0,
           overflowY: 'auto',
           overflowX: 'hidden',
           paddingBottom: '8px',
@@ -385,7 +402,7 @@ export function Sidebar() {
       </div>
 
       {/* Community bottom bar */}
-      {renderCommunityBar()}
+      {renderCommunityBar(forceExpanded)}
 
       {/* Collapse toggle */}
       <div
