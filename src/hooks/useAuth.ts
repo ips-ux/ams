@@ -1,4 +1,6 @@
 import { create } from 'zustand'
+import { signOut as firebaseSignOut } from 'firebase/auth'
+import { auth } from '@/config/firebase'
 import type { UserRole } from '@/types/enums'
 
 export interface AuthUser {
@@ -15,6 +17,7 @@ interface AuthState {
   isAuthenticated: boolean
   setUser: (user: AuthUser | null) => void
   setLoading: (loading: boolean) => void
+  signOut: () => Promise<void>
 }
 
 export const useAuthStore = create<AuthState>()((set) => ({
@@ -23,6 +26,10 @@ export const useAuthStore = create<AuthState>()((set) => ({
   isAuthenticated: false,
   setUser: (user) => set({ user, isAuthenticated: !!user, isLoading: false }),
   setLoading: (isLoading) => set({ isLoading }),
+  signOut: async () => {
+    await firebaseSignOut(auth)
+    set({ user: null, isAuthenticated: false })
+  },
 }))
 
 export const useAuth = () => useAuthStore()

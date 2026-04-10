@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useTheme } from '@/hooks/useTheme'
 import { useSidebar } from '@/hooks/useSidebar'
@@ -70,12 +71,26 @@ function SearchIcon() {
 export function TopBar() {
   const location = useLocation()
   const { isCollapsed, setMobileOpen } = useSidebar()
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
   // useTheme kept for potential future use — currently ThemeSwitcher handles it directly
   useTheme()
   const { width } = useWindowSize()
   const isMobile = width < 768
   const pageTitle = getPageTitle(location.pathname)
+
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false)
+      }
+    }
+    if (menuOpen) document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [menuOpen])
 
   const initials =
     user?.displayName
@@ -188,37 +203,110 @@ export function TopBar() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginLeft: 'auto' }}>
         <ThemeSwitcher />
 
-        {/* User avatar */}
-        <button
-          title={user?.displayName ?? user?.email ?? 'User'}
-          style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            background: 'var(--color-primary)',
-            border: '2px solid var(--color-border)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px',
-            fontWeight: 700,
-            color: 'var(--color-button-text)',
-            flexShrink: 0,
-            overflow: 'hidden',
-            padding: 0,
-          }}
-        >
-          {user?.avatarUrl ? (
-            <img
-              src={user.avatarUrl}
-              alt={user.displayName ?? 'User'}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          ) : (
-            initials
+        {/* User avatar + logout dropdown */}
+        <div ref={menuRef} style={{ position: 'relative' }}>
+          <button
+            onClick={() => setMenuOpen((o) => !o)}
+            title={user?.displayName ?? user?.email ?? 'User'}
+            style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: 'var(--color-primary)',
+              border: menuOpen
+                ? '2px solid var(--color-primary)'
+                : '2px solid var(--color-border)',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+              fontWeight: 700,
+              color: 'var(--color-button-text)',
+              flexShrink: 0,
+              overflow: 'hidden',
+              padding: 0,
+            }}
+          >
+            {user?.avatarUrl ? (
+              <img
+                src={user.avatarUrl}
+                alt={user.displayName ?? 'User'}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            ) : (
+              initials
+            )}
+          </button>
+
+          {menuOpen && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 'calc(100% + 8px)',
+                right: 0,
+                minWidth: '200px',
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+                borderRadius: 'var(--radius-md)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+                zIndex: 200,
+                overflow: 'hidden',
+              }}
+            >
+              {/* User info */}
+              <div
+                style={{
+                  padding: '12px 14px',
+                  borderBottom: '1px solid var(--color-border)',
+                }}
+              >
+                <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                  {user?.displayName ?? '—'}
+                </div>
+                <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: '2px' }}>
+                  {user?.email}
+                </div>
+              </div>
+
+              {/* Log out */}
+              <button
+                onClick={() => { void signOut() }}
+                style={{
+                  width: '100%',
+                  padding: '10px 14px',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  fontSize: '13px',
+                  color: 'var(--color-text-primary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'background var(--transition-fast)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--color-surface-elevated)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'none'
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 2H2.5A1.5 1.5 0 0 0 1 3.5v7A1.5 1.5 0 0 0 2.5 12H5M9 10l3-3-3-3M12 7H5"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Log Out
+              </button>
+            </div>
           )}
-        </button>
+        </div>
       </div>
     </div>
   )
